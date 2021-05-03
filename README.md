@@ -13,6 +13,7 @@ Simple *nix shell script to plot the signal statistics for the T-Mobile Home Int
 
 * Plotting RSRP and SNR for both the LTE and 5G bands
 * RSRP is color coded for the appropriate LTE band. That is, if the band switches, so does the color.
+* If the signal is lost, no data is plotted for easy identification.
 
 ## Usage
 
