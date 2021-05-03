@@ -9,6 +9,11 @@ Simple *nix shell script to plot the signal statistics for the T-Mobile Home Int
 - GNUPLOT
 - jq
 
+## Features
+
+* Plotting RSRP and SNR for both the LTE and 5G bands
+* RSRP is color coded for the appropriate LTE band. That is, if the band switches, so does the color.
+
 ## Usage
 
 First, download the file and put it somewhere in your PATH. This is a simple shell script so make sure the executable bit is set using `chmod +x tmobile_plot.sh` or invoke directly with `sh tmobile_plot.sh`.
