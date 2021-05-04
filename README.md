@@ -17,14 +17,14 @@ Simple *nix shell script to plot the signal statistics for the T-Mobile Home Int
 
 ## Usage
 
-First, download the file and put it somewhere in your PATH. This is a simple shell script so make sure the executable bit is set using `chmod +x tmobile_plot.sh` or invoke directly with `sh tmobile_plot.sh`.
+First, download the file and put it somewhere in your PATH. This is a simple shell script so make sure the executable bit is set using `chmod +x tmobile_plot.sh` or invoke directly with `bash tmobile_plot.sh`. You may need to use the latter version if `bash` is not located in `/usr/bin/` which is the case on MacOS.
 
 ```sh
 > ./tmobile_plot.sh -h
 tmobile_plot [options]
   -h        Show help
   -l        Only log the data. Do not plot
-  -d file   Set datafile to 'file'. Default is '/tmp/.data.cvs'
+  -d file   Set datafile to 'file'. Default is '/tmp/.data.csv'
   -o file   Set graph output to 'file'. Default is 'datafile'.pdf with any 
             extensions removed
 ```
@@ -51,7 +51,7 @@ Which produces the sample graph.
 
 I found this generally helpful in troubleshooting my installation. I haven't been able to get onto the 5G band yet so I didn't do much testing with the associated plots.
 
-There is a lot of thngs that could be done to make this better. Specifically with the plots and how they are laid out. If there is interest, I could massage this some more. I am not a web developer but I could see the appropriate person breaking this up into a daemon along with a simple http server (perhaps on a Raspberry Pi).
+This was a quick script so there are a lot of things that could be done to make this better. Specifically better script portability and refinement with how the plots are laid out. If there is interest, I could massage this some more. I am not a web developer but I could see the appropriate person breaking this up into a daemon along with a simple http server (perhaps on a Raspberry Pi).
 
 ## License
 
