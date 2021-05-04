@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 
 while getopts d:lho: flag
@@ -10,8 +10,8 @@ do
         h) echo "tmobile_plot [options]"
             echo "  -h        Show help"
             echo "  -l        Only log the data. Do not plot"
-            echo "  -d file   Set datafile to 'file'. Default is '/tmp/.data.cvs'"
-            echo "  -o file   Set graph output to 'file'. Default is 'datafile'.pdf wit any "
+            echo "  -d file   Set datafile to 'file'. Default is '/tmp/.data.csv'"
+            echo "  -o file   Set graph output to 'file'. Default is 'datafile'.pdf with any "
             echo "            extensions removed"
             exit 0;;
     esac
@@ -30,9 +30,9 @@ else
   outfile=${_outfile}
 fi
 
-echo "`date '+%Y%m%d-%H%M%S'`,$(curl -s http://192.168.12.1/fastmile_radio_status_web_app.cgi | jq -r '. | [.cell_LTE_stats_cfg[0].stat.Band,.cell_LTE_stats_cfg[0].stat.RSRPCurrent,.cell_LTE_stats_cfg[0].stat.SNRCurrent,.cell_5G_stats_cfg[0].stat.Band,.cell_5G_stats_cfg[0].stat.RSRPCurrent,.cell_5G_stats_cfg[0].stat.SNRCurrent] | @csv')" >> $datafile
+echo "$(date '+%Y%m%d-%H%M%S'),$(curl -s http://192.168.12.1/fastmile_radio_status_web_app.cgi | jq -r '. | [.cell_LTE_stats_cfg[0].stat.Band,.cell_LTE_stats_cfg[0].stat.RSRPCurrent,.cell_LTE_stats_cfg[0].stat.SNRCurrent,.cell_5G_stats_cfg[0].stat.Band,.cell_5G_stats_cfg[0].stat.RSRPCurrent,.cell_5G_stats_cfg[0].stat.SNRCurrent] | @csv')" >> $datafile
 
-echo "`tail -n 86400 $datafile`" > $datafile
+echo "$(tail -n 86400 $datafile)" > $datafile
 
 if [[ $log_only == "yes" ]]; then
   exit 0;
@@ -78,7 +78,7 @@ gnuplot -p <<-END
 
   validate(val) = ( \
     val < -120  ? "" : \
-    val > 20    ? "" : \
+    val > 25    ? "" : \
     val)
 
   plot '$datafile' \
