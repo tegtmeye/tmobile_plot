@@ -11,8 +11,8 @@ do
             echo "  -h        Show help"
             echo "  -l        Only log the data. Do not plot"
             echo "  -d file   Set datafile to 'file'. Default is '/tmp/.data.csv'"
-            echo "  -o file   Set graph output to 'file'. Default is 'datafile'.pdf with any "
-            echo "            extensions removed"
+            echo "  -o file   Set graph output to 'file'. Default is datafile with any "
+            echo "            extensions replaced with the current output type (default pdf)"
             exit 0;;
     esac
 done
@@ -25,7 +25,7 @@ fi
 
 if [[ $_outfile == "" ]]; then
   _outfile=$(echo "$datafile" | cut -f 1 -d '.')
-  outfile=${_outfile}.pdf
+  outfile=${_outfile}
 else
   outfile=${_outfile}
 fi
@@ -41,10 +41,10 @@ fi
 
 gnuplot -p <<-END
   set terminal pdfcairo enhanced color font ",10";
-  set output 'data.pdf';
+  set output '${outfile}.pdf';
 
   #set terminal pngcairo enhanced size 1024,768
-  #set output 'data.png';
+  #set output '${outfile}.png';
 
   set grid xtics back lc rgb '#808080' lt 0 lw 1
   set grid ytics back lc rgb '#808080' lt 0 lw 1
